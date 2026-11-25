@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>12月 ヨガライブ予定</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+/* Layout: 月間グリッド（PC）＋ 日付順リスト（スマホでも読める） */
+:root{
+  --bg:#f6f7f4; --surface:#ffffff; --fg:#2a302c; --muted:#6f786f; --line:#dfe3dc;
+  --accent:#4f7a64; --accent-soft:#e3eee7;
+  --night:#4d5a8a; --night-soft:#e6e9f4;
+  --day:#b0773a; --day-soft:#f6ebdc;
+  --morning:#3f8a8c; --morning-soft:#dff0ef;
+  --warn:#a3532d; --warn-soft:#fbeae0;
+  --sun:#b5524a; --sat:#3f6aa6; --cancel:#d0021b;
+  --display:"Zen Maru Gothic","Hiragino Maru Gothic ProN",system-ui,sans-serif;
+  --body:"Noto Sans JP","Hiragino Sans",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#161a18; --surface:#1f2421; --fg:#e7ebe7; --muted:#9aa49b; --line:#323a35;
+  --accent:#8fc2a6; --accent-soft:#25352c;
+  --night:#a9b6ee; --night-soft:#262c45;
+  --day:#e2ad73; --day-soft:#3a2d1d;
+  --morning:#80cfd1; --morning-soft:#1d3536;
+  --warn:#f0a07a; --warn-soft:#3d261b;
+  --sun:#ef8f86; --sat:#8fb2ec; --cancel:#ff6b6b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#161a18; --surface:#1f2421; --fg:#e7ebe7; --muted:#9aa49b; --line:#323a35;
+  --accent:#8fc2a6; --accent-soft:#25352c;
+  --night:#a9b6ee; --night-soft:#262c45;
+  --day:#e2ad73; --day-soft:#3a2d1d;
+  --morning:#80cfd1; --morning-soft:#1d3536;
+  --warn:#f0a07a; --warn-soft:#3d261b;
+  --sun:#ef8f86; --sat:#8fb2ec; --cancel:#ff6b6b; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding-block:32px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:28px}
+header{display:grid;gap:6px}
+.eyebrow{font-size:12px;letter-spacing:.12em;color:var(--accent);font-weight:700}
+h1{font-family:var(--display);font-size:clamp(26px,4vw,36px);margin:0;text-wrap:balance;font-weight:700}
+.sub{color:var(--muted);margin:0;font-size:14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot.night{background:var(--night)} .dot.day{background:var(--day)} .dot.morning{background:var(--morning)}
+
+.cal{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.dow,.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.dow div{padding:10px 8px;font-size:12px;font-weight:700;color:var(--muted);text-align:center;border-bottom:1px solid var(--line)}
+.dow .su{color:var(--sun)} .dow .sa{color:var(--sat)}
+.cell{min-height:118px;padding:8px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:6px;min-width:0}
+.cell:nth-child(7n){border-right:none}
+.cell.out{background:transparent;opacity:.35}
+.num{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:6px}
+.su .num{color:var(--sun)} .sa .num,.hol .num{color:var(--sat)}
+.hol .num{color:var(--sun)}
+.holname{font-size:10px;font-weight:500;color:var(--sun)}
+.today .num span.n{background:var(--accent);color:var(--surface);border-radius:999px;padding:0 7px}
+.ev{border-radius:8px;padding:5px 7px;font-size:12px;line-height:1.35;display:grid;gap:1px}
+.ev .t{font-weight:700;font-variant-numeric:tabular-nums;font-size:11px}
+.ev .name{overflow-wrap:anywhere}
+.ev.night{background:var(--night-soft);color:var(--fg)} .ev.night .t{color:var(--night)}
+.ev.day{background:var(--day-soft);color:var(--fg)} .ev.day .t{color:var(--day)}
+.ev.morning{background:var(--morning-soft);color:var(--fg)} .ev.morning .t{color:var(--morning)}
+.ev{text-decoration:none;transition:filter .15s}
+.ev:hover{filter:brightness(.95)}
+.ev:focus-visible,.watch:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.watch{justify-self:start;font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;margin-top:2px}
+.watch:hover{text-decoration:underline}
+.ev.flag{outline:1.5px dashed var(--warn);outline-offset:-1.5px}
+.ev.past{opacity:.78}
+.arc{font-size:10px;font-weight:700;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:0 5px;line-height:1.4}
+.off{color:var(--cancel);font-weight:700}
+.ev .off{font-size:11px}
+
+h2{font-family:var(--display);font-size:20px;margin:0}
+.list{display:grid;gap:10px}
+.item{display:grid;grid-template-columns:76px minmax(0,1fr);gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.date{display:grid;align-content:start;font-variant-numeric:tabular-nums}
+.date b{font-family:var(--display);font-size:22px;line-height:1.1}
+.date small{color:var(--muted);font-size:12px}
+.date .tm{font-weight:700;font-size:14px;margin-top:4px}
+.night .tm{color:var(--night)} .day .tm{color:var(--day)} .morning .tm{color:var(--morning)}
+.info{display:grid;gap:4px;min-width:0}
+.info .tags{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.info strong{font-size:15px}
+.info p{margin:0;color:var(--muted);font-size:13px}
+.chip{justify-self:start;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--warn-soft);color:var(--warn)}
+.note{background:var(--warn-soft);color:var(--fg);border-radius:12px;padding:12px 16px;font-size:13px}
+.inapp{background:var(--warn-soft);border:1px solid var(--warn);border-radius:12px;padding:14px 16px;display:grid;gap:8px;font-size:14px}
+.inapp[hidden]{display:none}
+.inapp b{color:var(--warn)}
+.inapp p{margin:0}
+.inapp .open{justify-self:start;background:var(--warn);color:var(--surface);font-weight:700;text-decoration:none;border-radius:999px;padding:8px 16px;font-size:14px}
+.inapp .open[hidden]{display:none}
+.note b{color:var(--warn)}
+footer{color:var(--muted);font-size:12px}
+.pf{justify-self:start;font-size:10px;font-weight:700;letter-spacing:.04em;padding:1px 6px;border-radius:4px;border:1px solid currentColor;line-height:1.4}
+.pf.yt{color:var(--sun)} .pf.vm{color:var(--morning)}
+.ev .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+
+@media (max-width:720px){
+  .cal{border-radius:10px}
+  .dow div{padding:6px 2px;font-size:11px}
+  .cell{min-height:84px;padding:4px 3px;gap:3px}
+  .num{font-size:11px;flex-wrap:wrap;gap:2px}
+  .holname{font-size:8px;line-height:1.2}
+  .ev{padding:3px 3px;border-radius:5px;font-size:10px;line-height:1.25}
+  .ev .t{font-size:9.5px}
+  .ev .row{gap:3px}
+  .ev .pf{font-size:8px;padding:0 3px}
+  .ev .arc{display:none}
+  .ev .off{font-size:10px}
+  .item{grid-template-columns:64px minmax(0,1fr)}
+}
+@media (max-width:420px){
+  .ev .name{font-size:9.5px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">YOGA LIVE · 2026年12月</div>
+    <h1>12月のヨガライブ予定</h1>
+    <p class="sub">予定をタップすると配信ページが開きます。終わった回はアーカイブで見られます。</p>
+    <div class="legend">
+      <span><i class="dot morning"></i>朝（9〜10時）</span>
+      <span><i class="dot day"></i>昼（14時）</span>
+      <span><i class="dot night"></i>夜（20〜21時）</span>
+      <span><b class="pf yt">YT</b>YouTube</span>
+      <span><b class="pf vm">VM</b>Vimeo</span>
+    </div>
+  </header>
+  <div class="inapp" id="inapp" hidden>
+    <p><b>動画がくるくる回って再生されないときは</b></p>
+    <p>InstagramやLINEのアプリ内では動画が再生できないことがあります。SafariやChromeで開き直してください。</p>
+    <a class="open" id="openExt" href="#">ブラウザで開く</a>
+    <p id="inappHow" style="font-size:12px;color:var(--muted)">ボタンで開けないときは、右上の「…」から「外部ブラウザで開く」を選んでください。</p>
+  </div>
+
+  <section class="cal" aria-label="12月の月間カレンダー">
+    <div class="dow"><div class="su">日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div class="sa">土</div></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="list" aria-label="日付順の一覧">
+    <h2>日付順の一覧</h2>
+    <div id="list" class="list"></div>
+  </section>
+
+  <footer>YouTube Studio・Vimeo の予約情報とアーカイブ（11/25 時点）をもとに作成。</footer>
+</div>
+
+<script>
+(()=>{const ua=navigator.userAgent;
+  if(!/Instagram|FBAN|FBAV|FB_IAB|Line\//i.test(ua))return;
+  const box=document.getElementById('inapp'),btn=document.getElementById('openExt');
+  const page=location.href.replace(/^https?:\/\//,'');
+  if(/Android/i.test(ua)){btn.href='intent://'+page+'#Intent;scheme=https;package=com.android.chrome;end';btn.textContent='Chromeで開く'}
+  else if(/iPhone|iPad|iPod/i.test(ua)){btn.href='x-safari-https://'+page;btn.textContent='Safariで開く'}
+  else btn.hidden=true;
+  box.hidden=false;
+})();
+const events=[
+  {d:1,time:"9:00",name:"脱力系顔ヨガ®",by:"みさお",url:"https://www.youtube.com/live/3AAt7FffEZ0"},
+  {d:2,time:"14:00",name:"ペルヴィスワーク",by:"かずみ",pf:"vm",url:"https://vimeo.com/event/6380492/embed/fee7fe091d"},
+  {d:3,time:"9:00",name:"季節のヨガ",by:"あやこ",pf:"vm",url:"https://vimeo.com/event/6368870/embed/8edc0165f3"},
+  {d:4,time:"21:00",name:"夜ヨガ",by:"あきこ",desc:"お身体をほぐして冷え対策のストレッチをします",url:"https://www.youtube.com/live/tZeM1HL3Uv0"},
+  {d:5,time:"14:00",name:"タイ式ヨガ 血流改善 みちよ",url:"https://www.youtube.com/live/yA1c7JCzFi0"},
+  {d:6,time:"9:00",name:"姿勢矯正",by:"はづき",pf:"vm",url:"https://vimeo.com/event/6368886/embed/fccb0421f5"},
+  {d:7,time:"9:00",name:"ストレッチヨガ",by:"ゆかり",pf:"vm",url:"https://vimeo.com/event/6378648/embed/eb496b55ef"},
+  {d:8,time:"9:00",name:"整えヨガ",by:"なおみ",url:"https://www.youtube.com/live/ztRjCgOm5p4"},
+  {d:9,time:"14:00",name:"筋膜～肩二の腕",by:"かずみ",pf:"vm",url:"https://vimeo.com/event/6380496/embed/4cd686dc17"},
+  {d:10,time:"9:00",name:"ヨガティス",by:"あやこ",pf:"vm",url:"https://vimeo.com/event/6368871/embed/ff5a51803c"},
+  {d:11,time:"21:00",name:"安眠ヨガ",by:"あずさ",url:"https://www.youtube.com/live/leDqn1bdCMM"},
+  {d:12,time:"9:00",name:"椅子ヨガ",by:"はづき",pf:"vm",url:"https://vimeo.com/event/6368888/embed/4aee9209c6"},
+  {d:14,time:"9:00",name:"骨盤底筋ヨガ",by:"ゆかり",pf:"vm",url:"https://vimeo.com/event/6378650/embed/b14fdf4464"},
+  {d:15,time:"21:00",name:"ピラティス ヨガ",by:"エリコ",url:"https://www.youtube.com/live/cMmzRRM9PhQ"},
+  {d:16,time:"14:00",name:"ペルヴィスワーク",by:"かずみ",pf:"vm",url:"https://vimeo.com/event/6380498/embed/ce4a22f0f7"},
+  {d:17,time:"9:00",name:"季節のヨガ",by:"あやこ",pf:"vm",url:"https://vimeo.com/event/6368874/embed/bd1af2e7f7"},
+  {d:18,time:"21:00",name:"夜ヨガ",by:"あきこ",desc:"お身体をほぐして冷え対策のストレッチをします",url:"https://www.youtube.com/live/1-Bi4cxSKjs"},
+  {d:19,time:"14:00",name:"タイ式ヨガ 血流改善 みちよ",url:"https://www.youtube.com/live/lxJNpes8AKg"},
+  {d:20,time:"9:00",name:"姿勢矯正",by:"はづき",pf:"vm",url:"https://vimeo.com/event/6368891/embed/32c80fe7dc"},
+  {d:21,time:"9:00",name:"ストレッチヨガ",by:"ゆかり",pf:"vm",url:"https://vimeo.com/event/6378652/embed/8682aa6879"},
+  {d:22,time:"9:00",name:"脱力系顔ヨガ®",by:"みさお",url:"https://www.youtube.com/live/FopQ3DsZg_U"},
+  {d:23,time:"14:00",name:"筋膜～美脚",by:"かずみ",pf:"vm",url:"https://vimeo.com/event/6380499/embed/cea3a93a66"},
+  {d:24,time:"9:00",name:"季節のヨガ",by:"あやこ",pf:"vm",url:"https://vimeo.com/event/6368875/embed/7628c15741"},
+  {d:25,time:"21:00",name:"安眠ヨガ",by:"あずさ",url:"https://www.youtube.com/live/XzKIy-GlYec"},
+  {d:26,time:"9:00",name:"姿勢矯正",by:"はづき",pf:"vm",url:"https://vimeo.com/event/6368894/embed/a7045d2c08"},
+  {d:28,time:"9:00",name:"ストレッチヨガ",by:"ゆかり",pf:"vm",url:"https://vimeo.com/event/6378654/embed/0e1a752072"}
+];
+const pfLabel=p=>p==='vm'?'<b class="pf vm">VM</b>':'<b class="pf yt">YT</b>';
+const slot=t=>{const h=parseInt(t);return h<12?"morning":h<18?"day":"night"};
+const dows=["日","月","火","水","木","金","土"];
+const holidays={};
+const first=new Date(2026,11,1).getDay(), days=31;
+const now=new Date();
+const isPast=e=>{const [h,m]=e.time.split(':').map(Number);return new Date(2026,11,e.d,h,m+90)<now};
+const todayD=(now.getFullYear()===2026&&now.getMonth()===11)?now.getDate():-1;
+const arcTag='<span class="arc">アーカイブ</span>';
+const offTag='<span class="off">休講</span>';
+const grid=document.getElementById('grid');
+const total=Math.ceil((first+days)/7)*7;
+for(let i=0;i<total;i++){
+  const d=i-first+1, c=document.createElement('div');
+  c.className='cell';
+  if(d<1||d>days){c.classList.add('out');grid.appendChild(c);continue}
+  const w=i%7; if(w===0)c.classList.add('su'); if(w===6)c.classList.add('sa'); if(holidays[d])c.classList.add('hol');
+  if(d===todayD)c.classList.add('today');
+  c.innerHTML=`<div class="num"><span class="n">${d}</span>${holidays[d]?`<span class="holname">${holidays[d]}</span>`:''}</div>`;
+  events.filter(e=>e.d===d).forEach(e=>{
+    const past=isPast(e)&&!e.off;
+    const ev=document.createElement('a');
+    ev.href=e.url; ev.target='_blank'; ev.rel='noopener';
+    ev.className='ev '+slot(e.time)+(e.flag?' flag':'')+(past?' past':'');
+    ev.innerHTML=`<span class="row"><span class="t">${e.time}</span>${pfLabel(e.pf)}${past?arcTag:''}</span><span class="name">${e.name}${e.by?'<br>'+e.by:''}</span>${e.off?offTag:''}`;
+    c.appendChild(ev);
+  });
+  grid.appendChild(c);
+}
+const list=document.getElementById('list');
+events.forEach(e=>{
+  const past=isPast(e)&&!e.off;
+  const w=dows[new Date(2026,11,e.d).getDay()];
+  const el=document.createElement('div');
+  el.className='item '+slot(e.time);
+  const where=e.pf==='vm'?'Vimeo':'YouTube';
+  el.innerHTML=`<div class="date"><b>12/${e.d}</b><small>${w}${holidays[e.d]?'・祝':''}</small><span class="tm">${e.time}</span></div>
+  <div class="info"><span class="tags">${pfLabel(e.pf)}${past?arcTag:''}</span><strong>${e.name}${e.off?' '+offTag:''}${e.by?'<br>'+e.by:''}</strong>${e.desc?`<p>${e.desc}</p>`:''}${e.off?'':`<a class="watch" href="${e.url}" target="_blank" rel="noopener">${past?where+'でアーカイブを見る':where+'で見る'} →</a>`}${e.flag?`<span class="chip">要確認：${e.flag}</span>`:''}</div>`;
+  list.appendChild(el);
+});
+</script>
+</body>
+</html>
