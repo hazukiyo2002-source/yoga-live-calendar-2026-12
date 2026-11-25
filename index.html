@@ -61,6 +61,7 @@ h1{font-family:var(--display);font-size:clamp(26px,4vw,36px);margin:0;text-wrap:
 .ev{border-radius:8px;padding:5px 7px;font-size:12px;line-height:1.35;display:grid;gap:1px}
 .ev .t{font-weight:700;font-variant-numeric:tabular-nums;font-size:11px}
 .ev .name{overflow-wrap:anywhere}
+@media (min-width:900px){.ev .name.nw{white-space:nowrap;overflow-wrap:normal}}
 .ev.night{background:var(--night-soft);color:var(--fg)} .ev.night .t{color:var(--night)}
 .ev.day{background:var(--day-soft);color:var(--fg)} .ev.day .t{color:var(--day)}
 .ev.morning{background:var(--morning-soft);color:var(--fg)} .ev.morning .t{color:var(--morning)}
@@ -167,31 +168,31 @@ footer{color:var(--muted);font-size:12px}
 })();
 const events=[
   {d:1,time:"9:00",name:"脱力系顔ヨガ®",by:"みさお",url:"https://www.youtube.com/live/3AAt7FffEZ0"},
-  {d:2,time:"14:00",name:"ペルヴィスワーク かずみ",pf:"vm",url:"https://vimeo.com/event/6380492/embed/fee7fe091d"},
+  {d:2,time:"14:00",name:"ペルヴィスワーク かずみ",nw:true,pf:"vm",url:"https://vimeo.com/event/6380492/embed/fee7fe091d"},
   {d:3,time:"9:00",name:"季節のヨガ",by:"あやこ",pf:"vm",url:"https://vimeo.com/event/6368870/embed/8edc0165f3"},
   {d:4,time:"21:00",name:"夜ヨガ",by:"あきこ",desc:"お身体をほぐして冷え対策のストレッチをします",url:"https://www.youtube.com/live/tZeM1HL3Uv0"},
   {d:5,time:"14:00",name:"タイ式ヨガ 血流改善 みちよ",url:"https://www.youtube.com/live/yA1c7JCzFi0"},
   {d:6,time:"9:00",name:"姿勢矯正",by:"はづき",pf:"vm",url:"https://vimeo.com/event/6368886/embed/fccb0421f5"},
-  {d:7,time:"9:00",name:"ストレッチヨガ ゆかり",pf:"vm",url:"https://vimeo.com/event/6378648/embed/eb496b55ef"},
+  {d:7,time:"9:00",name:"ストレッチヨガ ゆかり",nw:true,pf:"vm",url:"https://vimeo.com/event/6378648/embed/eb496b55ef"},
   {d:8,time:"9:00",name:"整えヨガ",by:"なおみ",url:"https://www.youtube.com/live/ztRjCgOm5p4"},
-  {d:9,time:"14:00",name:"筋膜～肩二の腕 かずみ",pf:"vm",url:"https://vimeo.com/event/6380496/embed/4cd686dc17"},
+  {d:9,time:"14:00",name:"筋膜～肩二の腕 かずみ",nw:true,pf:"vm",url:"https://vimeo.com/event/6380496/embed/4cd686dc17"},
   {d:10,time:"9:00",name:"ヨガティス",by:"あやこ",pf:"vm",url:"https://vimeo.com/event/6368871/embed/ff5a51803c"},
   {d:11,time:"21:00",name:"安眠ヨガ",by:"あずさ",url:"https://www.youtube.com/live/leDqn1bdCMM"},
   {d:12,time:"9:00",name:"椅子ヨガ",by:"はづき",pf:"vm",url:"https://vimeo.com/event/6368888/embed/4aee9209c6"},
   {d:14,time:"9:00",name:"骨盤底筋ヨガ",by:"ゆかり",pf:"vm",url:"https://vimeo.com/event/6378650/embed/b14fdf4464"},
-  {d:15,time:"21:00",name:"ピラティス ヨガ エリコ",url:"https://www.youtube.com/live/cMmzRRM9PhQ"},
-  {d:16,time:"14:00",name:"ペルヴィスワーク かずみ",pf:"vm",url:"https://vimeo.com/event/6380498/embed/ce4a22f0f7"},
+  {d:15,time:"21:00",name:"ピラティス ヨガ エリコ",nw:true,url:"https://www.youtube.com/live/cMmzRRM9PhQ"},
+  {d:16,time:"14:00",name:"ペルヴィスワーク かずみ",nw:true,pf:"vm",url:"https://vimeo.com/event/6380498/embed/ce4a22f0f7"},
   {d:17,time:"9:00",name:"季節のヨガ",by:"あやこ",pf:"vm",url:"https://vimeo.com/event/6368874/embed/bd1af2e7f7"},
   {d:18,time:"21:00",name:"夜ヨガ",by:"あきこ",desc:"お身体をほぐして冷え対策のストレッチをします",url:"https://www.youtube.com/live/1-Bi4cxSKjs"},
   {d:19,time:"14:00",name:"タイ式ヨガ 血流改善 みちよ",url:"https://www.youtube.com/live/lxJNpes8AKg"},
   {d:20,time:"9:00",name:"姿勢矯正",by:"はづき",pf:"vm",url:"https://vimeo.com/event/6368891/embed/32c80fe7dc"},
-  {d:21,time:"9:00",name:"ストレッチヨガ ゆかり",pf:"vm",url:"https://vimeo.com/event/6378652/embed/8682aa6879"},
+  {d:21,time:"9:00",name:"ストレッチヨガ ゆかり",nw:true,pf:"vm",url:"https://vimeo.com/event/6378652/embed/8682aa6879"},
   {d:22,time:"9:00",name:"脱力系顔ヨガ®",by:"みさお",url:"https://www.youtube.com/live/FopQ3DsZg_U"},
-  {d:23,time:"14:00",name:"筋膜～美脚 かずみ",pf:"vm",url:"https://vimeo.com/event/6380499/embed/cea3a93a66"},
+  {d:23,time:"14:00",name:"筋膜～美脚 かずみ",nw:true,pf:"vm",url:"https://vimeo.com/event/6380499/embed/cea3a93a66"},
   {d:24,time:"9:00",name:"季節のヨガ",by:"あやこ",pf:"vm",url:"https://vimeo.com/event/6368875/embed/7628c15741"},
   {d:25,time:"21:00",name:"安眠ヨガ",by:"あずさ",url:"https://www.youtube.com/live/XzKIy-GlYec"},
   {d:26,time:"9:00",name:"姿勢矯正",by:"はづき",pf:"vm",url:"https://vimeo.com/event/6368894/embed/a7045d2c08"},
-  {d:28,time:"9:00",name:"ストレッチヨガ ゆかり",pf:"vm",url:"https://vimeo.com/event/6378654/embed/0e1a752072"},
+  {d:28,time:"9:00",name:"ストレッチヨガ ゆかり",nw:true,pf:"vm",url:"https://vimeo.com/event/6378654/embed/0e1a752072"},
   {d:30,time:"9:00",name:"姿勢矯正",by:"はづき",pf:"vm",url:"https://vimeo.com/event/6380789/embed/e8640ceb25"}
 ];
 const pfLabel=p=>p==='vm'?'<b class="pf vm">VM</b>':'<b class="pf yt">YT</b>';
@@ -218,7 +219,7 @@ for(let i=0;i<total;i++){
     const ev=document.createElement('a');
     ev.href=e.url; ev.target='_blank'; ev.rel='noopener';
     ev.className='ev '+slot(e.time)+(e.flag?' flag':'')+(past?' past':'');
-    ev.innerHTML=`<span class="row"><span class="t">${e.time}</span>${pfLabel(e.pf)}${past?arcTag:''}</span><span class="name">${e.name}${e.by?'<br>'+e.by:''}</span>${e.off?offTag:''}`;
+    ev.innerHTML=`<span class="row"><span class="t">${e.time}</span>${pfLabel(e.pf)}${past?arcTag:''}</span><span class="name${e.nw?' nw':''}">${e.name}${e.by?'<br>'+e.by:''}</span>${e.off?offTag:''}`;
     c.appendChild(ev);
   });
   grid.appendChild(c);
@@ -234,6 +235,12 @@ events.forEach(e=>{
   <div class="info"><span class="tags">${pfLabel(e.pf)}${past?arcTag:''}</span><strong>${e.name}${e.off?' '+offTag:''}${e.by?'<br>'+e.by:''}</strong>${e.desc?`<p>${e.desc}</p>`:''}${e.off?'':`<a class="watch" href="${e.url}" target="_blank" rel="noopener">${past?where+'でアーカイブを見る':where+'で見る'} →</a>`}${e.flag?`<span class="chip">要確認：${e.flag}</span>`:''}</div>`;
   list.appendChild(el);
 });
+// 講師名を並べた回は、マスに1行で収まるまで文字を小さくする（スマホ幅では通常どおり折り返す）
+const fitNames=()=>{document.querySelectorAll('.ev .name.nw').forEach(n=>{n.style.fontSize='';n.style.letterSpacing='';
+  if(getComputedStyle(n).whiteSpace!=='nowrap')return;
+  const box=n.parentElement.clientWidth-parseFloat(getComputedStyle(n.parentElement).paddingLeft)*2;let f=12;
+  while(n.scrollWidth>box&&f>8.5){f-=.5;n.style.fontSize=f+'px';n.style.letterSpacing=f<11?'-.04em':''}})};
+fitNames();addEventListener('resize',fitNames);document.fonts&&document.fonts.ready.then(fitNames);
 </script>
 </body>
 </html>
